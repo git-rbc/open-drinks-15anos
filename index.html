@@ -374,6 +374,32 @@ a{color:inherit;}
   .trilho__pin{position:static;height:auto;}
   .trilho .track{overflow-x:auto;transform:none!important;}
 }
+
+/* ===== ESCALA E LARGURA (2026-08-08, mesmo bloco do buffet-essencial) =====
+   Base era 16px num container de 1360px: em monitor grande sobrava tela vazia
+   dos dois lados e faltava corpo de letra. Subir o font-size do <html> escala
+   TUDO que esta em rem de uma vez (a calibragem dos blocos LEGIBILIDADE sobe
+   junto, mantendo as proporcoes). Nao repetir tamanho a mao. */
+html{font-size:18px;}
+:root{--maxw:1680px;}
+@media(min-width:1600px){:root{--maxw:1800px;}}
+/* com o container mais largo, 2 colunas deixavam a linha da lista comprida
+   demais e o bloco sobrando de altura; em tela grande vai pra 3 */
+@media(min-width:1200px){.carta ul{columns:3;}}
+
+/* Valores: empilhado, o card do preco virava uma faixa de 1800px com o numero
+   perdido na ponta esquerda. Em tela grande, seletor a esquerda e preco a
+   direita, lado a lado, que e o que de fato ocupa a linha. */
+@media(min-width:1200px){
+  /* linha 2 em 1fr + align-self:start nos botoes: sem isso a altura extra do
+     card do preco (que cruza as duas linhas) abria um vao entre o rotulo e os
+     botoes */
+  .calc{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+    grid-template-rows:auto 1fr;column-gap:clamp(2rem,4vw,3.5rem);align-items:start;}
+  .calc__lbl{grid-column:1;margin-top:0;}
+  .calc__opts{grid-column:1;align-self:start;}
+  .calc__out{grid-column:2;grid-row:1 / span 2;margin-top:0;}
+}
 </style>
 </head>
 <body>
@@ -406,7 +432,7 @@ a{color:inherit;}
 
 <!-- ===== ABERTURA ===== -->
 <header class="overture" id="topo">
-  <img class="overture__bg" src="fotos/hero-drinks.jpg" alt="Drinks servidos no balcão de mármore" fetchpriority="high">
+  <img class="overture__bg" src="fotos/hero-15anos.jpg" alt="Bandeja de drinks sem álcool numa festa de 15 anos" fetchpriority="high">
   <div class="overture__scrim" aria-hidden="true"></div>
   <div class="overture__in">
     <img class="overture__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
@@ -455,8 +481,8 @@ a{color:inherit;}
       </figure>
     </div>
     <div class="gal__col gal__col--offset">
-      <figure class="frame frame--11 reveal" data-d="1">
-        <img class="frame__img" src="fotos/convidada-drink.jpg" alt="Convidada de vestido rosa com um drink sem álcool na mão" loading="lazy" style="object-position:center 24%">
+      <figure class="frame frame--34 reveal" data-d="1">
+        <img class="frame__img" src="fotos/convidada-drink.jpg" alt="Debutante de vestido rosa com um drink sem álcool na mão" loading="lazy" style="object-position:center 32%">
         <figcaption class="frame__cap">A primeira taça da noite</figcaption>
       </figure>
     </div>
@@ -513,13 +539,15 @@ a{color:inherit;}
     <h2 class="sec__title reveal">Os <em>valores</em></h2>
     <p class="sec__lead reveal" data-d="1">Valor por pessoa, fechado no contrato. Com open bar de bebidas na festa, o open de drinks fica mais barato.</p>
   </div>
-  <p class="calc__lbl reveal">A festa tem open bar de bebidas?</p>
-  <div class="calc__opts reveal" id="calcOpts" role="group" aria-label="Open bar de bebidas do evento"></div>
+  <div class="calc">
+    <p class="calc__lbl reveal">A festa tem open bar de bebidas?</p>
+    <div class="calc__opts reveal" id="calcOpts" role="group" aria-label="Open bar de bebidas do evento"></div>
 
-  <div class="calc__out reveal">
-    <p class="calc__ctx" id="calcCtx"></p>
-    <p class="calc__preco" id="calcPreco"></p>
-    <p class="calc__nota" id="calcNota"></p>
+    <div class="calc__out reveal">
+      <p class="calc__ctx" id="calcCtx"></p>
+      <p class="calc__preco" id="calcPreco"></p>
+      <p class="calc__nota" id="calcNota"></p>
+    </div>
   </div>
 </section>
 
