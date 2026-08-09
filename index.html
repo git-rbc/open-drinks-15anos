@@ -90,10 +90,16 @@ a{color:inherit;}
 .overture__logo{height:34px;width:auto;margin-bottom:2.2rem;opacity:.95;}
 .overture__kicker{color:var(--accent);margin-bottom:1.6rem;display:flex;gap:1rem;align-items:center;}
 .overture__kicker::before{content:"";width:44px;height:1px;background:var(--accent);}
-/* lining-nums: a Cormorant usa algarismo antigo por padrao e o 9 desce abaixo
-   da linha (vira um "g" no meio da caixa alta) e ainda bate no overflow:hidden
-   da .row. Mesma correcao dos precos. */
-.hero-title{font-family:var(--serif);font-weight:400;line-height:.9;font-size:clamp(3.4rem,14vw,10rem);letter-spacing:.005em;text-transform:uppercase;font-variant-numeric:lining-nums;}
+/* lining-nums: a Cormorant usa algarismo antigo por padrao e numero no titulo
+   desce abaixo da linha (vira um "g" no meio da caixa alta) e ainda bate no
+   overflow:hidden da .row. Mesma correcao dos precos.
+   O `15vh` dentro do min() e o que faz o hero CABER em notebook: sao 3 linhas
+   de titulo mais logo, kicker, sub e botoes, e so com vw a abertura passava de
+   1000px de altura e jogava os botoes pra fora da primeira tela. Em celular o
+   min() escolhe o vw e nada muda. */
+.hero-title{font-family:var(--serif);font-weight:400;line-height:.9;
+  font-size:clamp(3.4rem,min(14vw,15vh),10rem);letter-spacing:.005em;
+  text-transform:uppercase;font-variant-numeric:lining-nums;}
 .hero-title .row{display:block;overflow:hidden;}
 .hero-title .row i{display:inline-block;font-style:normal;transform:translateY(115%);}
 .hero-title .row.it{font-style:italic;color:var(--accent);text-transform:none;}
@@ -389,6 +395,19 @@ a{color:inherit;}
 html{font-size:18px;}
 :root{--maxw:1680px;}
 @media(min-width:1600px){:root{--maxw:1800px;}}
+
+/* HERO EM TELA BAIXA (notebook 1366x768 e 1280x720): so encolher o titulo nao
+   resolvia, porque os espacos fixos (padding do bloco, logo, margens) somam
+   quase 200px. Aqui eles apertam e os botoes voltam pra primeira tela. Medido
+   no browser: com isto o rodape dos botoes cabe de 720px de altura pra cima. */
+@media(max-height:820px){
+  .overture__in{padding-top:5rem;padding-bottom:2.5rem;}
+  .overture__logo{height:26px;margin-bottom:1.1rem;}
+  .overture__kicker{margin-bottom:1.1rem;}
+  .overture__sub{margin-top:1.1rem;}
+  .overture__cta-row{margin-top:1.6rem;}
+  .btn{padding:.85rem 1.5rem;}
+}
 /* com o container mais largo, 2 colunas deixavam a linha da lista comprida
    demais e o bloco sobrando de altura; em tela grande vai pra 3 */
 @media(min-width:1200px){.carta ul{columns:3;}}
@@ -443,12 +462,12 @@ html{font-size:18px;}
   <div class="overture__in">
     <img class="overture__logo" src="assets/indaia-wordmark-white-trim.png" alt="Eventos Indaiá">
     <p class="eyebrow overture__kicker">Open de Drinks Sem Álcool · 15 Anos</p>
-    <h1 class="hero-title" id="heroTitle" aria-label="Dos 9 aos 90, todo mundo bebe">
-      <span class="row"><i>DOS 9</i></span>
-      <span class="row it"><i>aos 90,</i></span>
-      <span class="row it"><i>todo mundo bebe</i></span>
+    <h1 class="hero-title" id="heroTitle" aria-label="O primeiro drink da vida deles">
+      <span class="row"><i>O PRIMEIRO</i></span>
+      <span class="row it"><i>drink</i></span>
+      <span class="row it"><i>da vida deles</i></span>
     </h1>
-    <p class="overture__sub">Doze drinks sem álcool. O adolescente ama, o adulto se apaixona, a avó pede o segundo.</p>
+    <p class="overture__sub">Adolescente que nunca provou. Adulto que nunca teve a chance.</p>
     <div class="overture__cta-row">
       <a class="btn btn--beam" href="#drinks">Ver os drinks
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
