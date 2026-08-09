@@ -130,8 +130,9 @@ a{color:inherit;}
 /* ===== HISTÓRIA ===== */
 .statement{position:relative;}
 .statement__pin{display:flex;align-items:center;padding-block:clamp(2.5rem,7vh,5rem);}
-.statement__eyebrow{color:var(--accent-txt);margin-bottom:2.2rem;display:flex;gap:1rem;align-items:center;}
-.statement__eyebrow::before{content:"";width:44px;height:1px;background:var(--accent);}
+/* sem o tracinho antes do rotulo: pedido de 2026-08-08. O ::before de 44px que
+   o open-drinks tem aqui foi removido; o kicker do hero mantem o dele. */
+.statement__eyebrow{color:var(--accent-txt);margin-bottom:2.2rem;}
 .statement__text{font-family:var(--serif);font-weight:400;line-height:1.22;
   font-size:clamp(1.6rem,4.2vw,3.2rem);max-width:30ch;letter-spacing:-.01em;}
 .statement__text .w{transition:opacity .3s linear;}
@@ -467,7 +468,7 @@ html{font-size:18px;}
       <span class="row it"><i>drink</i></span>
       <span class="row it"><i>da vida deles</i></span>
     </h1>
-    <p class="overture__sub">Doze receitas sem álcool, servidas na taça, na mesa e na pista.</p>
+    <p class="overture__sub">Doze receitas sem álcool.</p>
     <div class="overture__cta-row">
       <a class="btn btn--beam" href="#drinks">Ver os drinks
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
